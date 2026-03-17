@@ -1,0 +1,88 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block title %}Register - MEDCONNECT{% endblock %}
+
+{% block content %}
+<div class="auth-container auth-layout">
+    <div class="auth-card">
+        <div class="auth-header">
+            <i class="fas fa-user-plus"></i>
+            <h2>Create Account</h2>
+            <p>Join MEDCONNECT - Your Healthcare Platform</p>
+        </div>
+
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert {% if message.tags == 'error' %}alert-danger{% else %}alert-success{% endif %}">
+                    <i class="fas {% if message.tags == 'error' %}fa-exclamation-circle{% else %}fa-check-circle{% endif %}"></i>
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+
+        <form method="post" class="auth-form">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="username">
+                    <i class="fas fa-user"></i> Username
+                </label>
+                <input type="text" id="username" name="username" placeholder="Choose a username" required>
+            </div>
+
+            <div class="form-group">
+                <label for="email">
+                    <i class="fas fa-envelope"></i> Email
+                </label>
+                <input type="email" id="email" name="email" placeholder="Enter your email" required>
+            </div>
+
+            <div class="form-group">
+                <label for="password">
+                    <i class="fas fa-lock"></i> Password
+                </label>
+                <input type="password" id="password" name="password" placeholder="Create a strong password" required>
+            </div>
+
+            <div class="form-group">
+                <label for="confirm_password">
+                    <i class="fas fa-lock-open"></i> Confirm Password
+                </label>
+                <input type="password" id="confirm_password" name="confirm_password" placeholder="Confirm your password" required>
+            </div>
+
+            <button type="submit" class="btn-primary">Register</button>
+        </form>
+
+        <div class="auth-footer">
+            <p>Already have an account? <a href="/login/">Login here</a></p>
+        </div>
+    </div>
+    
+    <!-- 3D Media Card (Flip effect) -->
+    <div class="media-card" id="register-media-card">
+        <div class="media-inner">
+            <div class="media-front">
+                <video autoplay muted loop playsinline class="media-video" preload="auto">
+                    <!-- Try local first, then remote fallbacks. Replace static/core/doctor_register.mp4 with a real MP4. -->
+                    <source src="{% static 'core/doctor_register.mp4' %}" type="video/mp4">
+                    <source src="https://cdn.videvo.net/videvo_files/video/free/2019-07/large_watermarked/190629_03_Hospital_1080p_preview.mp4" type="video/mp4">
+                    <source src="https://sample-videos.com/video123/mp4/720/big_buck_bunny_720p_1mb.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+                <div class="media-caption">
+                    <h3>Welcome to HealthCare</h3>
+                    <p>Join now for easy appointments & care.</p>
+                </div>
+            </div>
+            <div class="media-back">
+                <img src="https://images.unsplash.com/photo-1588774060260-8f6c2b6a3f7b?auto=format&fit=crop&w=800&q=80" alt="Health care preview" />
+                <div class="media-back-overlay">
+                    <h3>Preview</h3>
+                    <p>Tap to flip for more details.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

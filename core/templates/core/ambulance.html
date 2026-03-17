@@ -1,0 +1,35 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Ambulance Services - MEDCONNECT{% endblock %}
+
+{% block breadcrumbs %}
+<div class="breadcrumb">
+    <div class="container">
+        <a href="/">Home</a> <span class="separator">></span> <span class="current">Ambulance</span>
+    </div>
+</div>
+{% endblock %}
+
+{% block content %}
+<section class="ambulance">
+    <div class="container">
+        <h2 class="section-title">Emergency Ambulance Services</h2>
+        <p>For immediate medical assistance, please contact our emergency services:</p>
+        <div class="emergency-contact">
+            <h3>Emergency Hotline</h3>
+            <p><strong>Phone:</strong> 108 (National Ambulance Service)</p>
+            <p><strong>Local Emergency:</strong> +91-123-456-7890</p>
+        </div>
+        <div class="service-info">
+            <h3>Available Services</h3>
+            <ul>
+                <li>24/7 Emergency Response</li>
+                <li>Advanced Life Support</li>
+                <li>Patient Transportation</li>
+                <li>Medical Equipment on Board</li>
+            </ul>
+        </div>
+        <a href="tel:108" class="btn btn-danger"><i class="fas fa-phone"></i> Call Ambulance Now</a>
+    </div>
+</section>
+{% endblock %}

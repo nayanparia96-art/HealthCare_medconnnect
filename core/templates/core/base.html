@@ -1,0 +1,161 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}MEDCONNECT{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'core/style.css' %}">
+    <link rel="stylesheet" href="{% static 'core/hero.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Popular Surgeries Grid */
+        .surgeries-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        @media (max-width: 576px) {
+            .surgeries-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (min-width: 577px) and (max-width: 768px) {
+            .surgeries-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+        
+        @media (min-width: 992px) {
+            .surgeries-grid {
+                grid-template-columns: repeat(5, 1fr);
+            }
+        }
+        
+        .surgery-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 1.5rem 1rem;
+            border-radius: 12px;
+            background: white;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        }
+        
+        .surgery-card:hover {
+            transform: scale(1.08);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.12);
+        }
+        
+        .surgery-icon-circle {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-center;
+            font-size: 2rem;
+            color: white;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+        }
+        
+        .surgery-name {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #333;
+            text-align: center;
+            line-height: 1.3;
+        }
+    </style>
+</head>
+<body>
+    <div class="page-container">
+        <header>
+            <div class="navbar">
+                <div class="logo">
+                    <img src="{% static 'core/medconnect-logo.svg' %}" alt="MEDCONNECT" style="width: 40px; height: 40px; margin-right: 8px;">
+                    <span>MEDCONNECT</span>
+                </div>
+                <nav class="nav-menu">
+                    <a href="/" class="nav-link">Home</a>
+                    {% if user.is_authenticated %}
+                        <a href="/profile/" class="nav-link">Profile</a>
+                        <a href="/book/" class="nav-link">Book Appointment</a>
+                        <a href="/my-appointments/" class="nav-link">My Appointments</a>
+                        <a href="/doctors/" class="nav-link">Doctors</a>
+                        <a href="/patients/" class="nav-link">Patients</a>
+                        <a href="/medicines/" class="nav-link">Medicines</a>
+                        <a href="/cancer-detector/" class="nav-link">Cancer Detector</a>
+                        <a href="/blood/" class="nav-link">Blood Bank</a>
+                        <a href="/feedback/" class="nav-link">Feedback</a>
+                        <a href="/ambulance/" class="nav-link">Ambulance</a>
+                        <form method="post" action="{% url 'logout' %}" style="display: inline;">
+                            {% csrf_token %}
+                            <button type="submit" class="nav-link btn-logout">Logout</button>
+                        </form>
+                    {% else %}
+                        <a href="/login/" class="nav-link">Login</a>
+                        <a href="/register/" class="nav-link btn-nav">Register</a>
+                    {% endif %}
+                </nav>
+            </div>
+        </header>
+
+        <main class="main-content">
+            {% block breadcrumbs %}{% endblock %}
+            {% block content %}{% endblock %}
+        </main>
+
+        <footer class="footer">
+            <div class="footer-content">
+                <div class="footer-links">
+                    <div class="footer-section">
+                        <h4>Quick Access</h4>
+                        <a href="/doctors/">Our Doctors</a>
+                        <a href="/medicines/">Medicines</a>
+                        <a href="/blood/">Blood Bank</a>
+                        <a href="/book/">Book Appointment</a>
+                    </div>
+                    <div class="footer-section">
+                        <h4>Support</h4>
+                        <a href="/feedback/">Feedback</a>
+                        <a href="/ambulance/">Emergency</a>
+                        <a href="/profile/">My Profile</a>
+                        <a href="/my-appointments/">My Appointments</a>
+                    </div>
+                    <div class="footer-section">
+                        <h4>Contact</h4>
+                        <p><i class="fas fa-phone"></i> Emergency: 108</p>
+                        <p><i class="fas fa-envelope"></i> support@healthcare.com</p>
+                        <p><i class="fas fa-map-marker-alt"></i> 24/7 Available</p>
+                    </div>
+                </div>
+                <div class="footer-bottom">
+                    <p>&copy; 2026 <strong>Nayan Kumar Parya</strong> - MEDCONNECT. Made with <span class="heart">❤</span> for your well-being</p>
+                    <p>Your trusted healthcare partner</p>
+                </div>
+            </div>
+        </footer>
+        
+        <!-- Emergency Ambulance Button - Available on all pages -->
+        <div class="emergency-float">
+            <a href="/ambulance/" class="emergency-btn" title="Emergency Ambulance">
+                <i class="fas fa-ambulance"></i>
+                <span class="emergency-text">Emergency</span>
+            </a>
+        </div>
+        
+    </div>
+    <script src="{% static 'core/script.js' %}"></script>
+    <script src="{% static 'core/hero.js' %}"></script>
+</body>
+</html>
