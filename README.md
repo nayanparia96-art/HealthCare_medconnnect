@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Health Care System
 
 A complete, production-ready health care management system built with Django and modern frontend technologies.
@@ -294,3 +295,7 @@ For issues or questions, please contact the development team or open an issue on
 
 Last Updated: January 2026
 Version: 1.0.0
+=======
+# HealthCare_medconnnect
+This healthcare project is designed to provide easy access to medical services for users. It allows patients to book appointments, check doctor availability, and get basic health-related information online. The goal of this system is to make healthcare services simple, fast, and accessible for everyone.
+>>>>>>> 27d14e41b253947b675ec5941584ef9112f11b59
