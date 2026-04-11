@@ -1,0 +1,34 @@
+{% load static %}
+<section class="hc-hero-section" role="banner" aria-label="Healthcare hero">
+    <div class="hc-hero-slides">
+        <div class="hc-hero-slide hc-active" style="background-image: url('{% static "core/hero1.jpg" %}');" aria-hidden="false"></div>
+        <div class="hc-hero-slide" style="background-image: url('{% static "core/hero2.jpg" %}');" aria-hidden="true"></div>
+        <div class="hc-hero-slide" style="background-image: url('{% static "core/hero3.jpg" %}');" aria-hidden="true"></div>
+        <div class="hc-hero-slide" style="background-image: url('{% static "core/hero4.jpg" %}');" aria-hidden="true"></div>
+        <div class="hc-hero-slide" style="background-image: url('{% static "core/hero5.jpg" %}');" aria-hidden="true"></div>
+        <div class="hc-hero-slide" style="background-image: url('{% static "core/hero6.jpg" %}');" aria-hidden="true"></div>
+    </div>
+
+    <div class="hc-hero-overlay" aria-hidden="true"></div>
+
+    <div class="hc-hero-content">
+        <div class="hc-hero-inner">
+            <h1>Quality Care, Close To Home</h1>
+            <p>Book appointments, consult top doctors and manage your health easily.</p>
+            <div class="hc-hero-actions">
+                <a class="btn-primary" href="/login/">Login</a>
+                <a class="btn-secondary" href="/register/">Register</a>
+            </div>
+        </div>
+    </div>
+
+    <button class="hc-hero-nav hc-hero-prev" aria-label="Previous slide">‹</button>
+    <button class="hc-hero-nav hc-hero-next" aria-label="Next slide">›</button>
+</section>
+
+<!-- Notes:
+ - Add your images at static/core/hero1.jpg, hero2.jpg, hero3.jpg
+ - Include the stylesheet and script in your base template:
+   <link rel="stylesheet" href="{% static 'core/hero.css' %}">
+   <script src="{% static 'core/hero.js' %}"></script>
+-->

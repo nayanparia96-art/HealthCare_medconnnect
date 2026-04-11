@@ -1,0 +1,63 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block title %}Medicines - MEDCONNECT{% endblock %}
+
+{% block breadcrumbs %}
+<div class="breadcrumb">
+    <div class="container">
+        <a href="/">Home</a> <span class="separator">></span> <span class="current">Medicines</span>
+    </div>
+</div>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="page-header">
+        <h2><i class="fas fa-pills"></i> Available Medicines</h2>
+        <p>Order medicines online for fast home delivery</p>
+    </div>
+
+    </div>
+
+    {% if medicines %}
+        <div class="medicines-grid">
+            {% for medicine in medicines %}
+            <div class="medicine-card">
+                <div class="medicine-icon">
+                    {% if medicine.image %}
+                        <img src="{{ medicine.image.url }}" alt="{{ medicine.name }}" class="medicine-image">
+                    {% else %}
+                        <i class="fas fa-capsules"></i>
+                    {% endif %}
+                </div>
+                <div class="medicine-body">
+                    <h3>{{ medicine.name }}</h3>
+                    <p class="description">{{ medicine.description }}</p>
+                    <div class="medicine-footer">
+                        <div class="price-stock">
+                            <span class="price">${{ medicine.price }}</span>
+                            <span class="stock {% if medicine.stock > 0 %}in-stock{% else %}out-stock{% endif %}">
+                                {% if medicine.stock > 0 %}
+                                    <i class="fas fa-check-circle"></i> Stock: {{ medicine.stock }}
+                                {% else %}
+                                    <i class="fas fa-times-circle"></i> Out of Stock
+                                {% endif %}
+                            </span>
+                        </div>
+                        <button class="btn btn-primary" {% if medicine.stock == 0 %}disabled{% endif %}>
+                            <i class="fas fa-shopping-cart"></i> Order Now
+                        </button>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="empty-state">
+            <i class="fas fa-inbox"></i>
+            <p>No medicines available at the moment.</p>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}

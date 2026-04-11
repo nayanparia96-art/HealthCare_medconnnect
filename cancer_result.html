@@ -1,0 +1,30 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block title %}Cancer Detector Result - MEDCONNECT{% endblock %}
+
+{% block content %}
+<div class="cancer-container">
+    <h2>Cancer Detector Result</h2>
+
+    {% if result %}
+        <div class="result-box {% if result == 'Cancer Detected' %}detected{% else %}not-detected{% endif %}">
+            <h3>{{ result }}</h3>
+            <p class="prob">Probability: <strong>{{ probability }}%</strong></p>
+            <div class="advice">
+                <h4>{{ advice.title }}</h4>
+                <ul>
+                    {% for item in advice.items %}
+                        <li>{{ item }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <p class="disclaimer">This AI system is for educational purposes only and not a substitute for professional medical diagnosis.</p>
+        </div>
+    {% else %}
+        <p>No result data available. Please upload an image from the <a href="{% url 'cancer_detector' %}">detector page</a>.</p>
+    {% endif %}
+    
+</div>
+<link rel="stylesheet" href="{% static 'core/cancer.css' %}">
+{% endblock %}

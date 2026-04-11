@@ -1,0 +1,242 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block title %}Application Form - MEDCONNECT{% endblock %}
+
+{% block content %}
+<section class="py-12 bg-gradient-to-b from-blue-50 to-white">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <!-- Header -->
+        <div class="text-center mb-12">
+            <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+                Submit Your Application
+            </h1>
+            <p class="text-lg text-gray-600">
+                Join MEDCONNECT and be part of our growing healthcare team
+            </p>
+        </div>
+
+        <!-- Messages -->
+        {% if messages %}
+            <div class="mb-6">
+                {% for message in messages %}
+                    <div class="alert alert-{% if message.tags %}{{ message.tags }}{% else %}info{% endif %} alert-dismissible fade show" role="alert">
+                        {{ message }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        <!-- Form Container -->
+        <div class="bg-white rounded-xl shadow-lg p-8 md:p-12">
+            <form method="POST" enctype="multipart/form-data" class="space-y-8">
+                {% csrf_token %}
+
+                <!-- Personal Information Section -->
+                <div class="border-b pb-8">
+                    <h2 class="text-2xl font-bold text-gray-900 mb-6 flex items-center">
+                        <i class="fas fa-user text-blue-600 mr-3"></i>
+                        Personal Information
+                    </h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="form-group">
+                            <label for="{{ form.first_name.id_for_label }}" class="form-label font-semibold text-gray-700 mb-2 block">
+                                {{ form.first_name.label }} <span class="text-red-500">*</span>
+                            </label>
+                            {{ form.first_name }}
+                            {% if form.first_name.errors %}
+                                <div class="text-red-500 text-sm mt-1">{{ form.first_name.errors }}</div>
+                            {% endif %}
+                        </div>
+
+                        <div class="form-group">
+                            <label for="{{ form.last_name.id_for_label }}" class="form-label font-semibold text-gray-700 mb-2 block">
+                                {{ form.last_name.label }} <span class="text-red-500">*</span>
+                            </label>
+                            {{ form.last_name }}
+                            {% if form.last_name.errors %}
+                                <div class="text-red-500 text-sm mt-1">{{ form.last_name.errors }}</div>
+                            {% endif %}
+                        </div>
+
+                        <div class="form-group">
+                            <label for="{{ form.email.id_for_label }}" class="form-label font-semibold text-gray-700 mb-2 block">
+                                {{ form.email.label }} <span class="text-red-500">*</span>
+                            </label>
+                            {{ form.email }}
+                            {% if form.email.errors %}
+                                <div class="text-red-500 text-sm mt-1">{{ form.email.errors }}</div>
+                            {% endif %}
+                            <small class="text-gray-500">We'll send a confirmation email to this address</small>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="{{ form.phone.id_for_label }}" class="form-label font-semibold text-gray-700 mb-2 block">
+                                {{ form.phone.label }} <span class="text-red-500">*</span>
+                            </label>
+                            {{ form.phone }}
+                            {% if form.phone.errors %}
+                                <div class="text-red-500 text-sm mt-1">{{ form.phone.errors }}</div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Application Details Section -->
+                <div class="border-b pb-8">
+                    <h2 class="text-2xl font-bold text-gray-900 mb-6 flex items-center">
+                        <i class="fas fa-briefcase text-blue-600 mr-3"></i>
+                        Application Details
+                    </h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="form-group md:col-span-2">
+                            <label for="{{ form.position.id_for_label }}" class="form-label font-semibold text-gray-700 mb-2 block">
+                                {{ form.position.label }} <span class="text-red-500">*</span>
+                            </label>
+                            {{ form.position }}
+                            {% if form.position.errors %}
+                                <div class="text-red-500 text-sm mt-1">{{ form.position.errors }}</div>
+                            {% endif %}
+                        </div>
+
+                        <div class="form-group">
+                            <label for="{{ form.application_type.id_for_label }}" class="form-label font-semibold text-gray-700 mb-2 block">
+                                {{ form.application_type.label }} <span class="text-red-500">*</span>
+                            </label>
+                            {{ form.application_type }}
+                            {% if form.application_type.errors %}
+                                <div class="text-red-500 text-sm mt-1">{{ form.application_type.errors }}</div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Experience & Skills Section -->
+                <div class="border-b pb-8">
+                    <h2 class="text-2xl font-bold text-gray-900 mb-6 flex items-center">
+                        <i class="fas fa-star text-blue-600 mr-3"></i>
+                        Experience & Skills
+                    </h2>
+
+                    <div class="form-group mb-6">
+                        <label for="{{ form.experience.id_for_label }}" class="form-label font-semibold text-gray-700 mb-2 block">
+                            {{ form.experience.label }} <span class="text-red-500">*</span>
+                        </label>
+                        {{ form.experience }}
+                        {% if form.experience.errors %}
+                            <div class="text-red-500 text-sm mt-1">{{ form.experience.errors }}</div>
+                        {% endif %}
+                        <small class="text-gray-500">Tell us about your relevant work experience</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="{{ form.skills.id_for_label }}" class="form-label font-semibold text-gray-700 mb-2 block">
+                            {{ form.skills.label }} <span class="text-red-500">*</span>
+                        </label>
+                        {{ form.skills }}
+                        {% if form.skills.errors %}
+                            <div class="text-red-500 text-sm mt-1">{{ form.skills.errors }}</div>
+                        {% endif %}
+                        <small class="text-gray-500">Separate multiple skills with commas</small>
+                    </div>
+                </div>
+
+                <!-- Additional Information Section -->
+                <div class="pb-8">
+                    <h2 class="text-2xl font-bold text-gray-900 mb-6 flex items-center">
+                        <i class="fas fa-file-alt text-blue-600 mr-3"></i>
+                        Additional Information
+                    </h2>
+
+                    <div class="form-group mb-6">
+                        <label for="{{ form.cover_letter.id_for_label }}" class="form-label font-semibold text-gray-700 mb-2 block">
+                            {{ form.cover_letter.label }} <span class="text-red-500">*</span>
+                        </label>
+                        {{ form.cover_letter }}
+                        {% if form.cover_letter.errors %}
+                            <div class="text-red-500 text-sm mt-1">{{ form.cover_letter.errors }}</div>
+                        {% endif %}
+                        <small class="text-gray-500">Write a brief cover letter explaining why you're interested in this position</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="{{ form.resume.id_for_label }}" class="form-label font-semibold text-gray-700 mb-2 block">
+                            {{ form.resume.label }}
+                        </label>
+                        {{ form.resume }}
+                        {% if form.resume.errors %}
+                            <div class="text-red-500 text-sm mt-1">{{ form.resume.errors }}</div>
+                        {% endif %}
+                        <small class="text-gray-500">Maximum file size: 5MB. Accepted formats: PDF, DOC, DOCX</small>
+                    </div>
+                </div>
+
+                <!-- Submit Section -->
+                <div class="bg-blue-50 rounded-lg p-6 flex items-center justify-between">
+                    <div class="flex items-center">
+                        <i class="fas fa-info-circle text-blue-600 mr-3"></i>
+                        <p class="text-gray-700">
+                            A confirmation email will be sent to <strong>{{ form.email.value|default:"your email" }}</strong> once submitted.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Buttons -->
+                <div class="flex gap-4">
+                    <button type="submit" class="flex-1 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-bold py-3 px-6 rounded-lg transition duration-300 shadow-md hover:shadow-lg">
+                        <i class="fas fa-paper-plane mr-2"></i>
+                        Submit Application
+                    </button>
+                    <a href="{% url 'home' %}" class="flex-1 bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-3 px-6 rounded-lg transition duration-300 text-center">
+                        <i class="fas fa-arrow-left mr-2"></i>
+                        Cancel
+                    </a>
+                </div>
+            </form>
+
+            <!-- Info Box -->
+            <div class="mt-12 p-6 bg-yellow-50 border-l-4 border-yellow-400 rounded">
+                <h3 class="font-bold text-yellow-800 mb-2">
+                    <i class="fas fa-lightbulb mr-2"></i>
+                    Tips for a Strong Application
+                </h3>
+                <ul class="text-yellow-700 text-sm space-y-1">
+                    <li>✓ Provide detailed and accurate information</li>
+                    <li>✓ Highlight your relevant experience and skills</li>
+                    <li>✓ Write a compelling cover letter that shows your enthusiasm</li>
+                    <li>✓ Double-check your email address for confirmation</li>
+                    <li>✓ Include your resume if available (max 5MB)</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+        width: 100%;
+        padding: 0.75rem 1rem;
+        border: 2px solid #e0e7ff;
+        border-radius: 0.5rem;
+        font-size: 1rem;
+        transition: all 0.3s ease;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus {
+        outline: none;
+        border-color: #667eea;
+        box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+    }
+
+    .form-group textarea {
+        font-family: inherit;
+        resize: vertical;
+        min-height: 120px;
+    }
+</style>
+{% endblock %}

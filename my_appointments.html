@@ -1,0 +1,63 @@
+{% extends 'core/base.html' %}
+
+{% block title %}My Appointments - MEDCONNECT{% endblock %}
+
+{% block breadcrumbs %}
+<div class="breadcrumb">
+    <div class="container">
+        <a href="/">Home</a> <span class="separator">></span> <span class="current">My Appointments</span>
+    </div>
+</div>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="page-header">
+        <h2><i class="fas fa-calendar-alt"></i> My Appointments</h2>
+        <p>View and manage your scheduled appointments</p>
+    </div>
+
+    {% if appointments %}
+        <div class="appointments-list">
+            {% for appointment in appointments %}
+            <div class="appointment-card">
+                <div class="appointment-header">
+                    <h3>{{ appointment.doctor.name }}</h3>
+                    <span class="appointment-date">
+                        <i class="fas fa-calendar"></i>
+                        {{ appointment.date|date:"M d, Y" }}
+                    </span>
+                </div>
+                <div class="appointment-details">
+                    <p><strong>Specialty:</strong> {{ appointment.doctor.specialty }}</p>
+                    <p><strong>Patient:</strong> {{ appointment.patient.name }}</p>
+                    <p><strong>Email:</strong> {{ appointment.patient.email }}</p>
+                    <p><strong>Phone:</strong> {{ appointment.patient.phone }}</p>
+                    <p><strong>Time:</strong> {{ appointment.date|date:"g:i A" }}</p>
+                    {% if appointment.notes %}
+                        <p><strong>Notes:</strong> {{ appointment.notes }}</p>
+                    {% endif %}
+                </div>
+                <div class="appointment-actions">
+                    <button class="btn btn-primary">
+                        <i class="fas fa-edit"></i> Reschedule
+                    </button>
+                    <button class="btn btn-danger">
+                        <i class="fas fa-times"></i> Cancel
+                    </button>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="no-appointments">
+            <i class="fas fa-calendar-times"></i>
+            <h3>No Appointments Found</h3>
+            <p>You haven't booked any appointments yet.</p>
+            <a href="/book/" class="btn btn-primary">
+                <i class="fas fa-plus"></i> Book Your First Appointment
+            </a>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}
