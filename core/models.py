@@ -86,6 +86,12 @@ class Application(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     email_sent = models.BooleanField(default=False)
+
+    @property
+    def skills_list(self):
+        if not self.skills:
+            return []
+        return [skill.strip() for skill in self.skills.split(',') if skill.strip()]
     
     class Meta:
         ordering = ['-created_at']

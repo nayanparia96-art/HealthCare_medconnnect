@@ -1,0 +1,83 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+{% include 'core/hero.html' %}
+
+<section class="services fade-in">
+    <div class="container">
+        <h2>Our Services</h2>
+        <div class="services-grid">
+            <div class="service-card slide-up">
+                <div class="service-icon">
+                    <i class="fas fa-calendar-check"></i>
+                </div>
+                <h3>Appointment Booking</h3>
+                <p>Schedule appointments with doctors easily.</p>
+            </div>
+            <div class="service-card slide-up" style="animation-delay: 0.2s;">
+                <div class="service-icon">
+                    <i class="fas fa-user-md"></i>
+                </div>
+                <h3>Patient Management</h3>
+                <p>Manage patient records and history.</p>
+            </div>
+            <div class="service-card slide-up" style="animation-delay: 0.4s;">
+                <div class="service-icon">
+                    <i class="fas fa-stethoscope"></i>
+                </div>
+                <h3>Doctor Profiles</h3>
+                <p>View and connect with qualified doctors.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="portfolio fade-in">
+    <div class="container">
+        <h2>Our Portfolio</h2>
+        <div class="portfolio-grid">
+            <div class="portfolio-item bounce-in">
+                <img src="{% static 'core/portfolio1.jpg' %}" alt="Cancer Detection">
+                <h3>Cancer Detection Tool</h3>
+                <p>Advanced AI-powered cancer detection.</p>
+            </div>
+            <div class="portfolio-item bounce-in" style="animation-delay: 0.3s;">
+                <img src="{% static 'core/portfolio2.jpg' %}" alt="Blood Bank">
+                <h3>Blood Bank Management</h3>
+                <p>Efficient blood donation and management system.</p>
+            </div>
+            <div class="portfolio-item bounce-in" style="animation-delay: 0.6s;">
+                <img src="{% static 'core/portfolio3.jpg' %}" alt="Ambulance Service">
+                <h3>Ambulance Services</h3>
+                <p>24/7 emergency ambulance services.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="testimonials fade-in">
+    <div class="container">
+        <h2>What Our Patients Say</h2>
+        <div class="testimonials-grid">
+            <div class="testimonial slide-left">
+                <p>"Excellent service and caring doctors."</p>
+                <cite>- John Doe</cite>
+            </div>
+            <div class="testimonial slide-right" style="animation-delay: 0.2s;">
+                <p>"Quick appointments and great care."</p>
+                <cite>- Jane Smith</cite>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="about fade-in">
+    <div class="container">
+        <h2>About Us</h2>
+        <p>We provide comprehensive health care solutions to improve patient outcomes.</p>
+    </div>
+</section>
+{% endblock %}

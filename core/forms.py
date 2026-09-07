@@ -31,7 +31,7 @@ class ApplicationForm(forms.ModelForm):
                 'class': 'form-control',
                 'placeholder': 'Enter your phone number',
                 'required': True,
-                'pattern': '[0-9\-\+\s\(\)]*',
+                'pattern': r'[0-9\-\+\s\(\)]*',
             }),
             'position': forms.TextInput(attrs={
                 'class': 'form-control',
